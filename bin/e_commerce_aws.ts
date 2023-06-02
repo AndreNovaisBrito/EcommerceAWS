@@ -8,7 +8,7 @@ const app = new cdk.App()
 
 const env: cdk.Environment = {
   account: "134116043491",
-  region: "eu-west-2",
+  region: "us-east-1",
 }
 
 const tags = {
