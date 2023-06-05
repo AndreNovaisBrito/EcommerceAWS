@@ -5,6 +5,9 @@ import {
 } from "aws-lambda"
 import { Product, ProductRepository } from "/opt/nodejs/productsLayer"
 import { DynamoDB } from "aws-sdk"
+import * as AWSXRay from "aws-xray-sdk"
+
+AWSXRay.captureAWS(require("aws-sdk"))
 
 const productsDdb = process.env.PRODUCTS_DDB!
 const ddbClient = new DynamoDB.DocumentClient()
@@ -47,7 +50,7 @@ export async function handler(
       } catch (ConditionalCheckFailedException) {
         return {
           statusCode: 404,
-          body: 'Product not found',
+          body: "Product not found",
         }
       }
     } else if (event.httpMethod === "DELETE") {
