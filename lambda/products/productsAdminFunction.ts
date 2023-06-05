@@ -44,11 +44,10 @@ export async function handler(
           statusCode: 200,
           body: JSON.stringify(productUpdated),
         }
-      } catch (error) {
-        console.error((<Error>error).message)
+      } catch (ConditionalCheckFailedException) {
         return {
           statusCode: 404,
-          body: (<Error>error).message,
+          body: 'Product not found',
         }
       }
     } else if (event.httpMethod === "DELETE") {
